@@ -32,7 +32,7 @@ public class HospitalWorld {
         // Check Doctor is Registered 
             System.out.println("Let's register the doctors");
             Doctor doctors = new Doctor();
-            if(doctors.isRegistered == true) {
+            if(doctors.isRegistered() == true) {
                 System.out.println("Your doctor is in the system!");
             } else {
                 System.out.println("We couldn't find your doctor in our system");
