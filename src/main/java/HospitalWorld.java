@@ -1,5 +1,7 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 public class HospitalWorld {
     /**
@@ -13,6 +15,10 @@ public class HospitalWorld {
         try (Scanner reader = new Scanner(System.in)) {
             Hospital hospital = new Hospital();
             hospital.name = reader.nextLine();
+            final Pattern pattern = Pattern.compile("^[A-Za-z, ]++$");
+            if (!pattern.matcher(hospital.name).matches()) {
+                throw new IllegalArgumentException("Invalid String");
+            }
             System.out.println("Your hospital will now be called " + hospital.name);
         // Create 3 doctor instances w/ names and specialities
             System.out.println("It's time to hire some doctors!");
@@ -23,6 +29,9 @@ public class HospitalWorld {
             while(doctor < 3) {
                 System.out.println("Give your doctor a name ");
                 doctors.name.add(reader.nextLine());
+                if (!pattern.matcher(doctors.name.get(doctor)).matches()) {
+                    throw new IllegalArgumentException("Invalid String");
+                }
                 System.out.println("Congrats! You added " + doctors.name.get(doctor) + " to the team!");
                 doctor = doctor + 1;
             }
@@ -30,7 +39,10 @@ public class HospitalWorld {
             doctors.speciality = new ArrayList<>();
             while(speciality < 3){
                 System.out.println("Give your doctor a speciality ");
-                doctors.speciality.add(reader.nextLine());
+                doctors.speciality.add(reader.next());
+                if (!pattern.matcher(doctors.speciality.get(speciality)).matches()) {
+                    throw new IllegalArgumentException("You typed in an Invalid String");
+                }
                 System.out.println(doctors.name.get(speciality) + " speciality is " + doctors.speciality.get(speciality) + "!");
                 speciality = speciality + 1;
             }
@@ -56,6 +68,9 @@ public class HospitalWorld {
             while(amtOfPatients < 3){
                 System.out.println("Name of patient ");
                 Patient.name.add(reader.next());
+                if (!pattern.matcher(Patient.name.get(amtOfPatients)).matches()) {
+                    throw new IllegalArgumentException("Invalid String");
+                }
                 System.out.println("Which speciality are you interested in? ");
                 System.out.println("1: " + doctors.speciality.get(0));
                 System.out.println("2: " + doctors.speciality.get(1));
@@ -99,6 +114,10 @@ public class HospitalWorld {
                     docTotal = docTotal + 1;
                 }
 
+        } catch(InputMismatchException E) {
+            System.out.print("Check your inputs. System is expecting different type");
+        } catch (IndexOutOfBoundsException E) {
+            System.out.print("Pick a number within range. You are out of bound.");
         }
     }
 }
