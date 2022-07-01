@@ -1,4 +1,6 @@
+import java.util.List;
 
 public class Patients {
-    public String name;
+    public List <String> name;
+    public String speciality;
 }
