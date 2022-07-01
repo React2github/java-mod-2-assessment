@@ -2,6 +2,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class HospitalWorld {
+    /**
+     * @param args
+     */
     public static void main(String[] args) {
         
         // Get name of hospital from user 
@@ -10,24 +13,25 @@ public class HospitalWorld {
         try (Scanner reader = new Scanner(System.in)) {
             Hospital hospital = new Hospital();
             hospital.name = reader.nextLine();
-            System.out.println("Name of the hospital is " + hospital.name);
+            System.out.println("Welcome to " + hospital.name + " Regional Clinc");
         // Create 3 doctor instances w/ names and specialities
             System.out.println("It's time to hire some doctors!");
-            int doctor = 1;
+            System.out.println("Let's add 3 doctors to the team. ");
+            int doctor = 0;
             Doctor doctors = new Doctor();
             doctors.name = new ArrayList<>();
-            while(doctor < 4) {
-                System.out.println("Give the name of doctor " + doctor);
+            while(doctor < 3) {
+                System.out.println("Give your doctor a name ");
                 doctors.name.add(reader.nextLine());
-                System.out.println("Your doctor's name is " + doctors.name);
+                System.out.println("Congrats! You added " + doctors.name.get(doctor) + " to the team!");
                 doctor = doctor + 1;
             }
-            int speciality = 1;
+            int speciality = 0;
             doctors.speciality = new ArrayList<>();
-            while(speciality < 4){
-                System.out.println("Give the speciality of doctor " + speciality);
+            while(speciality < 3){
+                System.out.println("Give the speciality of doctor ");
                 doctors.speciality.add(reader.nextLine());
-                System.out.println("Your doctor's speciality is " + doctors.speciality);
+                System.out.println(doctors.name.get(speciality) + " speciality is " + doctors.speciality.get(speciality) + "!");
                 speciality = speciality + 1;
             }
             System.out.println(doctors.getSpeciality());
@@ -41,24 +45,25 @@ public class HospitalWorld {
             }
         // Create 5 patients for the hospital 
             System.out.println("It's time to create some patients");
+            System.out.println("Let's add 5 patients to the schedule");
             Patients Patient = new Patients();
             Patient.name = new ArrayList<>();
-            int amtOfPatients = 1;
-            while(amtOfPatients < 3){
-                System.out.println("Name of patient " + amtOfPatients);
-                Patient.name.add(reader.nextLine());
-                System.out.println("You patient's name is " + Patient.name);
+            Patient.speciality = new ArrayList<>();
+            int amtOfPatients = 0;
+            while(amtOfPatients <= 5){
+                System.out.println("Name of patient ");
+                Patient.name.add(reader.next());
+                System.out.println("Which speciality are you interested in? ");
+                System.out.println("1:" + doctors.speciality.get(0));
+                System.out.println("2:" + doctors.speciality.get(1));
+                System.out.println("3:" + doctors.speciality.get(2));
+                int specialityNum = reader.nextInt();
+                System.out.println(Patient.name.get(amtOfPatients) + " has been paired with " + doctors.name.get(specialityNum-1));
                 amtOfPatients = amtOfPatients + 1;
             }
+        // Display list of all specialities by doctors and let patients pick 
+
         // Match patients with doctors based on speciality
-            System.out.println("Which department does ur patient need? ");
-            Patient.speciality = reader.nextLine();
-            System.out.println(doctors.getSpeciality());
-            // if(Patient.speciality == doctors.speciality) {
-            //     System.out.println(Patient.name + "should be paired with " + doctors.name);
-            // } else {
-            //     System.out.println("No Match found!");
-            // }
 
         // Give readout of Hospital name, Doctors, Patients, in a menu summary 
 
