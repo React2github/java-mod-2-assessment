@@ -10,6 +10,10 @@ public class Doctor {
         return Arrays.toString(speciality.toArray());
     }
 
+    public String getName() {
+        return Arrays.toString(name.toArray());
+    }
+
     public boolean isRegistered(){
         return true;
     }

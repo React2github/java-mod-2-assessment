@@ -13,7 +13,7 @@ public class HospitalWorld {
         try (Scanner reader = new Scanner(System.in)) {
             Hospital hospital = new Hospital();
             hospital.name = reader.nextLine();
-            System.out.println("Welcome to " + hospital.name + " Regional Clinc");
+            System.out.println("Your hospital will now be called " + hospital.name);
         // Create 3 doctor instances w/ names and specialities
             System.out.println("It's time to hire some doctors!");
             System.out.println("Let's add 3 doctors to the team. ");
@@ -29,7 +29,7 @@ public class HospitalWorld {
             int speciality = 0;
             doctors.speciality = new ArrayList<>();
             while(speciality < 3){
-                System.out.println("Give the speciality of doctor ");
+                System.out.println("Give your doctor a speciality ");
                 doctors.speciality.add(reader.nextLine());
                 System.out.println(doctors.name.get(speciality) + " speciality is " + doctors.speciality.get(speciality) + "!");
                 speciality = speciality + 1;
@@ -44,28 +44,60 @@ public class HospitalWorld {
                 System.out.println("We couldn't find your doctor in our system");
             }
         // Create 5 patients for the hospital 
+        // Display list of all specialities by doctors and let patients pick 
+        // Match patients with doctors based on speciality
             System.out.println("It's time to create some patients");
             System.out.println("Let's add 5 patients to the schedule");
             Patients Patient = new Patients();
             Patient.name = new ArrayList<>();
             Patient.speciality = new ArrayList<>();
+            Patient.pairList = new ArrayList<>();
             int amtOfPatients = 0;
-            while(amtOfPatients <= 5){
+            while(amtOfPatients < 3){
                 System.out.println("Name of patient ");
                 Patient.name.add(reader.next());
                 System.out.println("Which speciality are you interested in? ");
-                System.out.println("1:" + doctors.speciality.get(0));
-                System.out.println("2:" + doctors.speciality.get(1));
-                System.out.println("3:" + doctors.speciality.get(2));
+                System.out.println("1: " + doctors.speciality.get(0));
+                System.out.println("2: " + doctors.speciality.get(1));
+                System.out.println("3: " + doctors.speciality.get(2));
                 int specialityNum = reader.nextInt();
-                System.out.println(Patient.name.get(amtOfPatients) + " has been paired with " + doctors.name.get(specialityNum-1));
+                String pairings = Patient.name.get(amtOfPatients) + " paired with " + doctors.name.get(specialityNum-1);
+                Patient.pairList.add(pairings);
+                System.out.println(pairings);
                 amtOfPatients = amtOfPatients + 1;
             }
-        // Display list of all specialities by doctors and let patients pick 
-
-        // Match patients with doctors based on speciality
-
         // Give readout of Hospital name, Doctors, Patients, in a menu summary 
+                System.out.println("We now have everything we need to start the simulation...");
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                System.out.println("Welcome to " + hospital.name + " Regional Clinic!");
+                System.out.println("We currently have " + doctors.name.size() + " doctors on our team");
+                int docTotal = 0;
+                while(docTotal < 3) {
+                System.out.println("Our doctors are " + doctors.name.get(docTotal));
+                docTotal = docTotal + 1;
+                }
+                System.out.println("We also have " + doctors.speciality.size() + " specialities in the Clinc" );
+                docTotal = 0;
+                while(docTotal < 3) {
+                    System.out.println("Our specialities " + doctors.speciality.get(docTotal));   
+                    docTotal = docTotal + 1;
+                }
+                System.out.println("We had " + Patient.name.size() + " Patients in our system");
+                docTotal = 0;
+                while(docTotal < 3) {
+                    System.out.println("Our patient's name " + Patient.name.get(docTotal));
+                    docTotal = docTotal + 1;
+                }
+                System.out.println("Today we treated a few of our patients");
+                docTotal = 0;
+                while(docTotal < 3){
+                    System.out.println(Patient.pairList.get(docTotal));
+                    docTotal = docTotal + 1;
+                }
 
         }
     }
